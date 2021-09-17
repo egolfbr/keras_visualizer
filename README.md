@@ -10,4 +10,5 @@ is transformed though the neural network.
 
 ### Contact information
 Brian Egolf - egolfbr@miamioh.edu 
+
 Jonathan Hagan - haganjd2@miamioh.edu
