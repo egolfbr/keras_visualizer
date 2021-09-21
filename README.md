@@ -16,7 +16,25 @@ Example:
 
 ```pip install pandas```
 
-After installing those dpendencies you will need to install keras. Keras is included in the tensorflow package but since we are focusing on front-end development we do not want tensorflow. Thus, we are left with two options. First we can install keras all alone. This can be done as follows ```pip install keras```. The other option is to install keras with a backend that allows for different GPUs. This is ideal because it will allow us to build and simulate. This can be done by using the following command ```pip install plaidml-keras```. PlaidML is an open-source keras backend that allows for users to use different GPUs other than Nvidia (which is required by tensorflow).
+After installing those dpendencies you will need to install keras. Keras is included in the tensorflow package but since we are focusing on front-end development we do not want tensorflow. Thus, we are left with two options. First we can install keras all alone. This can be done as follows ```pip install keras```. The other option is to install keras with a backend that allows for different GPUs. This is ideal because it will allow us to build and simulate. This can be done by using the following command ```pip install plaidml-keras```. PlaidML is an open-source keras backend that allows for users to use different GPUs other than Nvidia (which is required by tensorflow). After you install PlaidML you will need to edit the ```keras.json``` file. You can do this two different ways. 
+
+Option 1: Inline change
+
+In your python script at the very top before any code is written put the following two lines 
+```
+import os
+os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
+```
+This will change the variable ```KERAS_BACKEND``` to use plaidML in the ```keras.json``` file
+
+Option 2: Manually edit the JSON file 
+
+This option is also straightforward. First locate the ```keras.json ``` file in the ```.keras``` folder which is usually in your home directory. Once located, you can open and change the backend variable to use plaidML and then you do not need to include the lines of code in option 1. 
+
+Once this change has been made refresh your workspace and open a terminal and run the following command 
+```plaidml-setup```
+
+This will run and require user input in setting up some the parameters for the plaidML backend. This is not important in this project since we are focusing on visualization of machine learning models and not optimizing them. The setup script basically asks the user which device to execute the code on (CPU, GPU, Integrated graphics ect).
 
 
 ### Contact information
