@@ -1,3 +1,5 @@
+# Pretty useless, just here to demoonstrate how to use the import statements and 
+# how we can write to output files as well as list characteristics of each layer
 import numpy as np 
 import os
 os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
