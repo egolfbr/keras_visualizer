@@ -1,3 +1,4 @@
+from keras import layers
 import numpy as np 
 import os
 os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
@@ -36,35 +37,70 @@ def main():
     myModel.add(Dense(12, activation='relu'))
     myModel.add(Dense(4,  activation='softmax'))
 
-    # for layer in myModel.layers:
-    #     print("Layer Name: "+layer.name)
-    #     myModel.get_layer(layer.name)
-    #     print("Layer input shape: ")
-    #     print(layer.input_shape)
-    #     print("Layer Output shape: ")
-    #     print(layer.output_shape)
-    #     print("Layer activation: ")
-    #     print(layer.output)
-    #     tmp = str(layer.output)
-    #     print(tmp.rsplit(" ")[0])
-    #     print("-------------------")
 
     myLayers = []
     myInputShapes = []
     myOutputShapes = []
     myActivationFunctions = []
+    myNeurons = []
+
     for layer in myModel.layers:
         myLayers.append(layer.name)
         myInputShapes.append(layer.input_shape)
         myOutputShapes.append(layer.output_shape)
         tmp = str(layer.output)
         myActivationFunctions.append(tmp.rsplit(" ")[0])
-    print(myLayers)
-    print(myInputShapes)
-    print(myOutputShapes)
-    print(myActivationFunctions)
     myDict = myModel.get_config()
-    #print(myDict.values())
-    for x in myDict.values():
-        print(x,"\n")
+    all_layer_configs = myDict["layers"]
+    for l in all_layer_configs:
+        layer_dict = l
+        layer_config = layer_dict["config"]
+        #print(layer_config["units"])
+        myNeurons.append(layer_config["units"])
+
+    # show model parameters      
+    print("==================Model Parameters==================================")
+    print("Layer names:                 ",myLayers)
+    print("Input Shape:                 ",myInputShapes)
+    print("Output Shape:                ",myOutputShapes)
+    print("Activation Function:         ",myActivationFunctions)
+    print("Number of neurons per layer: ",myNeurons)
+    print("====================================================================")
+    
+
+
+
+    # Open a DOT file  to write to
+    dotFile = open(options.dot_file,'w')
+    dotFile.write('digraph g {\n')
+    for i in range(len(myLayers)):
+        if i == 0:
+            # This would be the input layer 
+            dotFile.write("{\n")
+            dotFile.write(myLayers[i] + " [shape=circle color=darkgreen]\n")
+            for j in range(myNeurons[i]):
+                dotFile.write(myLayers[i]+"_"+str(j)+"\n")
+            dotFile.write("}\n")
+        elif i == len(myLayers)-1:
+            # This would be the output layer
+            dotFile.write("{\n")
+            dotFile.write(myLayers[i] + " [shape=circle color=crimson]\n")
+            for j in range(myNeurons[i]):
+                dotFile.write(myLayers[i]+"_"+str(j)+"\n")
+            dotFile.write("}\n")
+        else:
+            # Hidden layers
+            dotFile.write("{\n")
+            dotFile.write(myLayers[i] + " [shape=circle color=white]\n")
+            for j in range(myNeurons[i]):
+                dotFile.write(myLayers[i]+"_"+str(j)+"\n")
+            dotFile.write("}\n")
+    
+    
+
+    
+        
+
+    dotFile.write("}")
+    dotFile.close()
 main()
