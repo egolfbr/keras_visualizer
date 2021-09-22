@@ -21,7 +21,7 @@ After installing those dpendencies you will need to install keras. Keras is incl
 Option 1: Inline change
 
 In your python script at the very top before any code is written put the following two lines 
-```
+```python
 import os
 os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
 ```
