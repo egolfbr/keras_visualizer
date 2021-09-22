@@ -31,7 +31,7 @@ Option 2: Manually edit the JSON file
 
 This option is also straightforward. First locate the ```keras.json ``` file in the ```.keras``` folder which is usually in your home directory. Once located, you can open and change the backend variable to use plaidML and then you do not need to include the lines of code in option 1. 
 
-Once this change has been made refresh your workspace and open a terminal and run the following command 
+Once this change has been made refresh your workspace and open a terminal and run the following command: 
 ```plaidml-setup```
 
 This will run and require user input in setting up some the parameters for the plaidML backend. This is not important in this project since we are focusing on visualization of machine learning models and not optimizing them. The setup script basically asks the user which device to execute the code on (CPU, GPU, Integrated graphics ect).
