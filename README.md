@@ -36,6 +36,8 @@ Once this change has been made refresh your workspace and open a terminal and ru
 
 This will run and require user input in setting up some the parameters for the plaidML backend. This is not important in this project since we are focusing on visualization of machine learning models and not optimizing them. The setup script basically asks the user which device to execute the code on (CPU, GPU, Integrated graphics ect).
 
+## Assumptions 
+In order to complete this project in the given timeline, we had to make some assumptions which led to a "dumbed down" version of our visualizer. The main example of this is that we assume that with layers such as Dense and others that allow for specification of the activation function, that the function is specified in the layer declaration and not as its own layer. Hopefully in future versions we can adjust this to be more robust to this issue and even include custom activation functions. 
 
 ### Contact information
 Brian Egolf - egolfbr@miamioh.edu 
