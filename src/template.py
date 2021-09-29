@@ -76,15 +76,37 @@ def main():
             print(layer_config)
             print("==================================================")
         if layer_type == "Dense":
+            # Simple 
             myNeurons.append(layer_config["units"])
         elif layer_type == "Conv2D":
+            # Convolutional layers do not have neurons, they have filters. 
+            # each filter has a specified height and width and is initialized
+            # with ther kernel_initializer. The filter is then convoled with the 
+            # input image and a new image is formed. Output of this layer is determined
+            # based on if padding is "same" or "valid"
+            # Ideally I would want to visualized this in the following way:
+            # if a layer had 4 filters then I would want 4 neurons of shape square inside 
+            # a giant rectangle to show that they are the same layer.
+            # Then, the output of that rectangle would be a single connection as a 2D connection 
+            # cannot be done in DOT. Or we could implement something similar to what is already 
+            # done and just do 1 giant node named "CONV layer" 
             myNeurons.append(layer_config["Filters"])
         elif layer_type == "Dropout":
+            # Look at the input shape (which is the output shape of the previous layer)
+            # and apply the dropout rate to it.
+            # For example, if the input shape is 6 and the rate is 0.5, that means 50% 
+            # of the connections will be turned to 0. We can model this as either 3
+            # random connections to random neurons or we can just have 6 connections 
+            # and add text to the node describing how that layer acts. 
             myDropoutRates.append(layer_config["rate"])
         elif layer_type == "Flatten":
-            # Here we would want to represent this as a rectangle, similar to 
+            # Here we would want to represent this as a rectangle, similar to Dropout and it
+            # will connect to the following layer with the number of connections equal to 
+            # the output shape of the Flatten layer.
             print()
         elif layer_type == "Activation":
+            # Output number of connections is consistent with the input shape. This layer 
+            # does not change the shape of the data, merely transforms it. 
             print()
         elif layer_type == "MaxPooling2D":
             print()
