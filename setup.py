@@ -6,7 +6,7 @@ setup(name="keras_dot_visualizer",
       author="Brian Egolf",
       author_email="egolfbr@miamioh.edu",
       url="https://github.com/ObeyedSky622/keras_visualizer",
-      package_dir = {'':'src'}
+      package_dir = {'':'src'},
       py_modules = ["writedot"]
   
 )
