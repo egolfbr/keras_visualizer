@@ -36,6 +36,10 @@ Once this change has been made refresh your workspace and open a terminal and ru
 
 This will run and require user input in setting up some the parameters for the plaidML backend. This is not important in this project since we are focusing on visualization of machine learning models and not optimizing them. The setup script basically asks the user which device to execute the code on (CPU, GPU, Integrated graphics ect).
 
+Now you are ready to install the keras_dot_visualizer!
+
+## Installation and Usage
+The work for this is maintained in GitHub and as a result there are two ways you can get the code. You can manually download from the repository, or you can install via pip.
 ## Future Work
 In order to complete this project in time, we had to sacrifice some functionality that would be very useful to have. Hopefully in future versions we can add functionality for custom activation functions, custom layers, sparsely connected layers and many more.
 ### Contact information
