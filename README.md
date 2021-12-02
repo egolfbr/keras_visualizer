@@ -1,4 +1,4 @@
-# keras_visualizer (W.I.P)
+# keras_visualizer
 A front-end keras visualizer
 
 ## Description
@@ -40,6 +40,10 @@ Now you are ready to install the keras_dot_visualizer!
 
 ## Installation and Usage
 The work for this is maintained in GitHub and as a result there are two ways you can get the code. You can manually download from the repository, or you can install via pip.
+
+```
+python -m pip install https://github.com/ObeyedSky622/keras_visualizer
+```
 ## Future Work
 In order to complete this project in time, we had to sacrifice some functionality that would be very useful to have. Hopefully in future versions we can add functionality for custom activation functions, custom layers, sparsely connected layers and many more.
 ### Contact information
