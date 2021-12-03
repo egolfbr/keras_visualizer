@@ -4,7 +4,7 @@ import sys
 
 
 # takes a keras model instance as input
-def main(myModel,debug=False,fileName = "myDotFile.dot"):
+def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
     INFO = "Input a keras model instance and outputs a graphviz DOT file and simulation file"
     VERSION = 0.0
     USAGE = "Usage: python3 script.py -d myModel.dot --db"
@@ -205,6 +205,6 @@ def main(myModel,debug=False,fileName = "myDotFile.dot"):
     del i
     del j 
     
-if __name__ == "main":
-    main()
+if __name__ == "writedotfile":
+    writedotfile()
 
