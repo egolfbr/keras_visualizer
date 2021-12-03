@@ -39,11 +39,8 @@ This will run and require user input in setting up some the parameters for the p
 Now you are ready to install the keras_dot_visualizer!
 
 ## Installation and Usage
-The work for this is maintained in GitHub and as a result there are two ways you can get the code. You can manually download from the repository, or you can install via pip.
+The work for this is maintained in GitHub and as a result there are two ways you can get the code. You can manually download from the repository, or you can install via pip. Currently, the best way to get and use the code is to download from GitHub and use in your own code repo by using a simple import statement. Pip installation is still being worked on and will be released with a later version.
 
-```
-python -m pip install https://github.com/egolfbr/keras_visualizer
-```
 ## Future Work
 In order to complete this project in time, we had to sacrifice some functionality that would be very useful to have. Hopefully in future versions we can add functionality for custom activation functions, custom layers, sparsely connected layers and many more.
 ### Contact information
