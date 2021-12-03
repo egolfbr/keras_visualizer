@@ -39,13 +39,20 @@ This will run and require user input in setting up some the parameters for the p
 Now you are ready to install the keras_dot_visualizer!
 
 ## Installation and Usage
-The work for this is maintained in GitHub and as a result there are two ways you can get the code. You can manually download from the repository, or you can install via pip. Currently, the best way to get and use the code is to download from GitHub and use in your own code repo by using a simple import statement. 
+The work for this is maintained in GitHub and as a result there are two ways you can get the code. You can manually download from the repository, or you can install via pip. 
 
+Example install via pip:
 ```
-git clone https://github.com/egolfbr/keras_visualizer
+python3 -m pip install git+https://github.com/egolfbr/keras_visualizer.git
 ```
+
+Example usage: 
 ```
-python3 setup.py install
+from keras_dot_visualizer import writedot
+from writedot import writedotfile
+...
+...
+writedotfile(your_keras_model_instance)
 ```
 
 ## Future Work
