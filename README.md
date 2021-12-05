@@ -60,4 +60,4 @@ In order to complete this project in time, we had to sacrifice some functionalit
 ### Contact information
 Brian Egolf - egolfbr@miamioh.edu 
 
-Jonathan Hagan - hagenjd2@miamioh.edu
+Jonathan Hagen - hagenjd2@miamioh.edu
