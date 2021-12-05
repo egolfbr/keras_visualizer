@@ -9,14 +9,17 @@ more layers and output formats but most importantly, adding simulation type func
 is transformed though the neural network. 
 
 ## Getting Started
-You may want to start a virtual environment that includes the packages that you want to work with. This can be done using the virtualenv tool that is available 
-to download using ```pip```. After creatint an environment you can install many of the common pip packages that machine learning engineers use such as ```pandas```,```numpy```, ```matplotlib```,```seaborn```, and ```scikit-learn```. These can be installed by using the ```pip``` or ```pip3``` command followed by the package name.
+# Install Keras
+We used plaidml as our backend. This allows us to use whatever computational tool our computer has regardless if it is NVIDIA or AMD. 
+```
+> pip install plaidml-keras
+```
+After installation, setup up plaidml to work with your computers hardware. Follow the prompts to select which device you want to run your models on. 
+```
+> plaidml-setup
+```
 
-Example:
-
-```pip install pandas```
-
-After installing those dpendencies you will need to install keras. Keras is included in the tensorflow package but since we are focusing on front-end development we do not want tensorflow. Thus, we are left with two options. First we can install keras all alone. This can be done as follows ```pip install keras```. The other option is to install keras with a backend that allows for different GPUs. This is ideal because it will allow us to build and simulate. This can be done by using the following command ```pip install plaidml-keras```. PlaidML is an open-source keras backend that allows for users to use different GPUs other than Nvidia (which is required by tensorflow). After you install PlaidML you will need to edit the ```keras.json``` file. You can do this two different ways. 
+Next you will have to make sure that keras is set to use the proper backend. If you already have Keras you can use one of the following options to change the backend environment from tensorflow to plaidml. If you installed Keras for the first time using the above command, I believe these steps are unneccessary but you may want to double check just in case by using option 2. 
 
 Option 1: Inline change
 
@@ -30,11 +33,17 @@ This will change the variable ```KERAS_BACKEND``` to use plaidML in the ```keras
 Option 2: Manually edit the JSON file 
 
 This option is also straightforward. First locate the ```keras.json ``` file in the ```.keras``` folder which is usually in your home directory. Once located, you can open and change the backend variable to use plaidML and then you do not need to include the lines of code in option 1. 
+```
+{
+"floatx" : "float32",
+"epsilon" : 1e-07,
+"backend" : "plaidml.keras.backend",
+"image_data_format" : "channels_last"
+}
+```
+An important side note, when working with image data, make sure your data matches the "image_data_format" tag or you can change the tag to match your data. If they do not match, you will get very poor results from your model. 
 
-Once this change has been made refresh your workspace and open a terminal and run the following command: 
-```plaidml-setup```
-
-This will run and require user input in setting up some the parameters for the plaidML backend. This is not important in this project since we are focusing on visualization of machine learning models and not optimizing them. The setup script basically asks the user which device to execute the code on (CPU, GPU, Integrated graphics ect).
+Once this change has been made refresh your workspace and open a terminal and run the setup command again to ensure that plaidML is working properly.
 
 Now you are ready to install the keras_dot_visualizer!
 
@@ -56,7 +65,7 @@ writedotfile(your_keras_model_instance)
 ```
 
 ## Future Work
-In order to complete this project in time, we had to sacrifice some functionality that would be very useful to have. Hopefully in future versions we can add functionality for custom activation functions, custom layers, sparsely connected layers and many more.
+In order to complete this project in time, we had to sacrifice some functionality that would be very useful to have. Hopefully in future versions we can add functionality for custom activation functions, custom layers, sparsely connected layers and many more. We are also currently working on a neuron viewer which will be able to simulate a single neuron or a group of neurons on a given layer, given some input data. 
 ### Contact information
 Brian Egolf - egolfbr@miamioh.edu 
 
