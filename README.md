@@ -8,8 +8,8 @@ solution available [here](https://github.com/lordmahyar/keras-visualizer) but th
 more layers and output formats but most importantly, adding simulation type functionality to the visualizer to allow designers to see how their data 
 is transformed though the neural network. 
 
-## Getting Started
-# Install Keras
+# Getting Started
+## Install Keras
 We used plaidml as our backend. This allows us to use whatever computational tool our computer has regardless if it is NVIDIA or AMD. 
 ```
 > pip install plaidml-keras
@@ -47,7 +47,7 @@ Once this change has been made refresh your workspace and open a terminal and ru
 
 Now you are ready to install the keras_dot_visualizer!
 
-## Installation and Usage
+# Installation and Usage
 The work for this is maintained in GitHub and as a result there are two ways you can get the code. You can manually download from the repository, or you can install via pip. 
 
 Example install via pip:
@@ -64,7 +64,7 @@ from writedot import writedotfile
 writedotfile(your_keras_model_instance)
 ```
 
-## Future Work
+# Future Work
 In order to complete this project in time, we had to sacrifice some functionality that would be very useful to have. Hopefully in future versions we can add functionality for custom activation functions, custom layers, sparsely connected layers and many more. We are also currently working on a neuron viewer which will be able to simulate a single neuron or a group of neurons on a given layer, given some input data. 
 ### Contact information
 Brian Egolf - egolfbr@miamioh.edu 
