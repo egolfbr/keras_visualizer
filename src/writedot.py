@@ -5,13 +5,11 @@ import sys
 
 # takes a keras model instance as input
 def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
-    INFO = "Input a keras model instance and outputs a graphviz DOT file and simulation file"
+    INFO = "Input a keras model instance and outputs a graphviz DOT file."
     VERSION = 0.0
-    USAGE = "Usage: python3 script.py -d myModel.dot --db"
     def showVersion():
         print(INFO)
         print(VERSION)
-        print(USAGE)
         sys.exit()
 
     if debug:
@@ -205,6 +203,107 @@ def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
     del i
     del j 
     
+def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeurons.dot",debug=False):
+
+    myLayers = []
+    myInputShapes = []
+    myOutputShapes = []
+    myActivationFunctions = []
+    mySplits = []
+    for layer in myTrainedModel.layers:
+        layer_name = layer.name
+        splits = layer_name.split('_')
+        mySplits.append(splits[0])
+        myLayers.append(layer.name)
+        myInputShapes.append(layer.input_shape)
+        myOutputShapes.append(layer.output_shape)
+        tmp = str(layer.output)
+        myActivationFunctions.append(tmp.rsplit(" ")[0])
+    myDict = myTrainedModel.get_config()
+    if debug == True:
+        print("==============Model Dictionary====================")
+        print(myDict)
+        print("==================================================")
+    all_layer_configs = myDict["layers"]
+    if debug == True:
+        print("=================All Layers Dictionary=================")
+        print(all_layer_configs)
+        print("==================================================")
+
+    for l in all_layer_configs:
+        layer_dict = l
+        layer_config = layer_dict["config"]
+        layer_type = layer_dict["class_name"]
+        if debug == True:
+            print("=================Layer Dictionary=================")
+            print(layer_dict)
+            print("==================================================")
+            print("=================Layer Config Dictionary==========")
+            print(layer_config)
+            print("==================================================")
+    layer = myTrainedModel.layers[layer_num]
+    layer_weights = layer.get_weights()[0]
+    rows = layer_weights.shape[0]
+    layer_biases = layer.get_weights()[1]
+    neuron_weights = []
+    neuron_biases = []
+    in_shape = myInputShapes[layer_num]
+    num_ins = in_shape[1]
+    if layer_type == "Dense":
+        for i in range(rows):
+            neuron_weights.append(layer_weights[i][neuron_num])
+            neuron_biases.append(layer_biases[i][neuron_num])
+    neuronDotFile = open(fileName,'w')
+    neuronDotFile.write('digraph g {\n')
+    neuronDotFile.write("graph[splines=line]\n")
+    for i in range(num_ins):
+        neuronDotFile.write("in_"+str(i)+"[label=\"\", fixedsize=\"false\", width=0, height=0, shape=none];")
+
+
+        
+    
+
+
+def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=1,fileName="myNeurons",debug=False):
+
+    myLayers = []
+    myInputShapes = []
+    myOutputShapes = []
+    myActivationFunctions = []
+    mySplits = []
+    for layer in myTrainedModel.layers:
+        layer_name = layer.name
+        splits = layer_name.split('_')
+        mySplits.append(splits[0])
+        myLayers.append(layer.name)
+        myInputShapes.append(layer.input_shape)
+        myOutputShapes.append(layer.output_shape)
+        tmp = str(layer.output)
+        myActivationFunctions.append(tmp.rsplit(" ")[0])
+    myDict = myTrainedModel.get_config()
+    if debug == True:
+        print("==============Model Dictionary====================")
+        print(myDict)
+        print("==================================================")
+    all_layer_configs = myDict["layers"]
+    if debug == True:
+        print("=================All Layers Dictionary=================")
+        print(all_layer_configs)
+        print("==================================================")
+
+    for l in all_layer_configs:
+        layer_dict = l
+        layer_config = layer_dict["config"]
+        layer_type = layer_dict["class_name"]
+        if debug == True:
+            print("=================Layer Dictionary=================")
+            print(layer_dict)
+            print("==================================================")
+            print("=================Layer Config Dictionary==========")
+            print(layer_config)
+            print("==================================================")
+
+    return 0
 if __name__ == "writedotfile":
     writedotfile()
 
