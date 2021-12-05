@@ -1,6 +1,4 @@
 # keras_visualizer
-A front-end keras visualizer
-
 ## Description
 This is a front-end, keras model visualizer. Existing visualizers only work within Tensorflow or other back-end wrappers, however, in an effort
 to eliminate or reduce vendor-lock scenarios, we though that it would be a good idea to create a front-end visualizer. There is already a front-end
