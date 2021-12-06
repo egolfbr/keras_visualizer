@@ -1,4 +1,27 @@
+from keras.engine.base_layer import Layer
+import numpy as np 
+import os
+os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
+import keras 
+from keras import layers
+from keras.layers import Dense, Flatten, Conv2D, Conv3D, MaxPooling2D, MaxPooling3D, InputLayer
+from keras.models import Sequential
+from keras import Model
 import sys 
+import subprocess
+
+def main():
+    # create a model, in version 1.2 we may want to add this as an input to the script so that the 
+    # the script can stand alone 
+    myModel = Sequential()
+    myModel.add(Dense(4,activation="relu",input_dim=8))
+    myModel.add(Dense(2,activation="tanh"))
+    myModel.add(Dense(1,  activation='softmax'))
+    
+    print("HERE")
+    #writedotfile(myModel)
+    neuron_viewer(myModel)
+    print("Test")
 
 
 
@@ -243,21 +266,23 @@ def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeurons.d
             print("==================================================")
     layer = myTrainedModel.layers[layer_num]
     layer_weights = layer.get_weights()[0]
-    rows = layer_weights.shape[0]
+    rows = layer_weights.shape[0]-1
     layer_biases = layer.get_weights()[1]
     neuron_weights = []
     neuron_biases = []
     in_shape = myInputShapes[layer_num]
     num_ins = in_shape[1]
-    if layer_type == "Dense":
-        for i in range(rows):
-            neuron_weights.append(layer_weights[i][neuron_num])
-            neuron_biases.append(layer_biases[i][neuron_num])
     neuronDotFile = open(fileName,'w')
-    neuronDotFile.write('digraph g {\n')
-    neuronDotFile.write("graph[splines=line]\n")
-    for i in range(num_ins):
-        neuronDotFile.write("in_"+str(i)+"[label=\"\", fixedsize=\"false\", width=0, height=0, shape=none];")
+    neuronDotFile.write("digraph g {\n")
+    neuronDotFile.write("graph[splines=line]\n\"")
+    print(layer_weights[0][neuron_num])
+    neuronDotFile.write(myLayers[layer_num])
+    neuronDotFile.write("\\n")
+    neuronDotFile.write("weight = " + str(layer_weights[0][neuron_num]))
+    neuronDotFile.write("\n")
+    neuronDotFile.write("bias = " + str(layer_biases[neuron_num]) + "\"")
+    neuronDotFile.write("}")
+    neuronDotFile.close()
 
 
         
@@ -302,8 +327,21 @@ def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=1,
             print("=================Layer Config Dictionary==========")
             print(layer_config)
             print("==================================================")
-
+    if layer_type == "Dense":
+    	for i in range(rows):
+    		print(rows)
+    		neuron_weights.append(layer_weights[i][neuron_num])
+    		neuron_biases.append(layer_biases[i]) #removed second parameter as individual neurons don't appear to have assigned biases
+    	neuronDotFile = open(fileName,'w')
+    	neuronDotFile.write('digraph g {\n')
+    	neuronDotFile.write("graph[splines=line]\n")
+    	for i in range(num_ins):
+        	neuronDotFile.write("in_"+str(i)+"[label=\"\", fixedsize=\"false\", width=0, height=0, shape=none];")
+    	neuronDotFile.write("}")
+    	neuronDotFile.close()
     return 0
+
 if __name__ == "writedotfile":
     writedotfile()
-
+    
+main()
