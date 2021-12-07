@@ -61,6 +61,7 @@ from writedot import writedotfile
 ...
 writedotfile(your_keras_model_instance)
 ```
+There is an exmample script and data included in this repo that was taken from (https://towardsdatascience.com/building-our-first-neural-network-in-keras-bdc8abbc17f5)[here]. This is a simple prediction neural network and we send it into our code to visualize and view weights and biases. 
 
 # Future Work
 In order to complete this project in time, we had to sacrifice some functionality that would be very useful to have. Hopefully in future versions we can add functionality for custom activation functions, custom layers, sparsely connected layers and many more. We are also currently working on a neuron viewer which will be able to simulate a single neuron or a group of neurons on a given layer, given some input data. 
