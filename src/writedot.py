@@ -1,30 +1,6 @@
-from keras.engine.base_layer import Layer
-import numpy as np 
 import os
 os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
-import keras 
-from keras import layers
-from keras.layers import Dense, Flatten, Conv2D, Conv3D, MaxPooling2D, MaxPooling3D, InputLayer
-from keras.models import Sequential
-from keras import Model
 import sys 
-import subprocess
-
-def main():
-    # create a model, in version 1.2 we may want to add this as an input to the script so that the 
-    # the script can stand alone 
-    myModel = Sequential()
-    myModel.add(Dense(4,activation="relu",input_dim=8))
-    myModel.add(Dense(2,activation="tanh"))
-    myModel.add(Dense(1,  activation='softmax'))
-    
-    print("HERE")
-    #writedotfile(myModel)
-    neuron_viewer(myModel)
-    #neuron_group_viewer(myModel)
-    print("Test")
-
-
 
 
 # takes a keras model instance as input
@@ -35,14 +11,10 @@ def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
         print(INFO)
         print(VERSION)
         sys.exit()
-
     if debug:
         showVersion()    
-
-
     # create a model, in version 1.2 we may want to add this as an input to the script so that the 
     # the script can stand alone 
-   
     rnnLayers = ["lstm","gru","simpleRNN"]
 
     myLayers = []
@@ -130,9 +102,6 @@ def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
             myNeurons.append(layer_config["units"])
         else:
             print(layer_type, " is not supported!")
-
-        
-
     # show model parameters
     if debug == True:      
         print("==================Model Parameters==================================")
@@ -142,17 +111,12 @@ def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
         print("Activation Function:         ",myActivationFunctions)
         print("Number of neurons per layer: ",myNeurons)
         print("====================================================================")
-    
-
-
-
     # Open a DOT file  to write to
     dotFile = open(fileName,'w')
     dotFile.write('digraph g {\n')
     dotFile.write("graph[splines=line]\n")
     # Declare all the variable that we will use to create our graph and 
     # and format them.
-
     for i in range(len(myLayers)):
         if i == 0:
             # This would be the input layer 
@@ -184,7 +148,6 @@ def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
                 dotFile.write(name)
             dotFile.write("}\n")
             dotFile.write("}\n")
-
     # create a space in the DOT file between declaring all nodes and connecting them
     dotFile.write("\n\n")
     for l in myModel.layers:
@@ -211,12 +174,11 @@ def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
             # we are at output layer
             dotFile.write("}")
     dotFile.close()
-    
-def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeuron.dot",debug=False):
 
+
+def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeuron.dot",debug=False):
     myLayers = []
     myInputShapes = []
-    
     for layer in myTrainedModel.layers:
         myLayers.append(layer.name)
         myInputShapes.append(layer.input_shape)
@@ -238,19 +200,13 @@ def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeuron.do
     neuronDotFile.close()
 
 
-        
-    
-
-
 def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=2,fileName="myNeurons.dot",debug=False):
 
     myLayers = []
     myInputShapes = []
     for layer in myTrainedModel.layers:
-        layer_name = layer.name
         myLayers.append(layer.name)
         myInputShapes.append(layer.input_shape)
-    myDict = myTrainedModel.get_config()
     layer = myTrainedModel.layers[layer_num]
     layer_weights = layer.get_weights()[0]
     rows = layer_weights.shape[0]-1
@@ -260,7 +216,7 @@ def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=2,
     neuronDotFile.write("graph[splines=line]\n")
     if (end_neuron - begin_neuron <= rows):
     	for neuron in range(begin_neuron,end_neuron+1):
-    		print(layer_biases[neuron])
+    		#print(layer_biases[neuron])
     		neuronDotFile.write("\"" + myLayers[layer_num] + "_" + str(neuron))
     		neuronDotFile.write("\\n")
     		neuronDotFile.write("weight = " + str(layer_weights[0][neuron]))
@@ -275,6 +231,6 @@ if __name__ == "writedotfile":
     
 if __name__ == "neuron_group_viewer":
     neuron_group_viewer()
-    
+
 if __name__ == "neuron_viewer":
     neuron_viewer()
