@@ -55,7 +55,7 @@ python3 -m pip install git+https://github.com/egolfbr/keras_visualizer.git
 
 Example usage: 
 ```
-from keras_dot_visualizer import writedot
+import writedot
 from writedot import writedotfile
 ...
 ...
