@@ -216,48 +216,15 @@ def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeuron.do
 
     myLayers = []
     myInputShapes = []
-    myOutputShapes = []
-    myActivationFunctions = []
-    mySplits = []
+    
     for layer in myTrainedModel.layers:
-        layer_name = layer.name
-        splits = layer_name.split('_')
-        mySplits.append(splits[0])
         myLayers.append(layer.name)
         myInputShapes.append(layer.input_shape)
-        myOutputShapes.append(layer.output_shape)
-        tmp = str(layer.output)
-        myActivationFunctions.append(tmp.rsplit(" ")[0])
     myDict = myTrainedModel.get_config()
-    if debug == True:
-        print("==============Model Dictionary====================")
-        print(myDict)
-        print("==================================================")
-    all_layer_configs = myDict["layers"]
-    if debug == True:
-        print("=================All Layers Dictionary=================")
-        print(all_layer_configs)
-        print("==================================================")
-
-    for l in all_layer_configs:
-        layer_dict = l
-        layer_config = layer_dict["config"]
-        layer_type = layer_dict["class_name"]
-        if debug == True:
-            print("=================Layer Dictionary=================")
-            print(layer_dict)
-            print("==================================================")
-            print("=================Layer Config Dictionary==========")
-            print(layer_config)
-            print("==================================================")
     layer = myTrainedModel.layers[layer_num]
     layer_weights = layer.get_weights()[0]
     rows = layer_weights.shape[0]-1
     layer_biases = layer.get_weights()[1]
-    neuron_weights = []
-    neuron_biases = []
-    in_shape = myInputShapes[layer_num]
-    num_ins = in_shape[1]
     neuronDotFile = open(fileName,'w')
     neuronDotFile.write("digraph g {\n")
     neuronDotFile.write("graph[splines=line]\n\"")
@@ -279,48 +246,15 @@ def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=2,
 
     myLayers = []
     myInputShapes = []
-    myOutputShapes = []
-    myActivationFunctions = []
-    mySplits = []
     for layer in myTrainedModel.layers:
         layer_name = layer.name
-        splits = layer_name.split('_')
-        mySplits.append(splits[0])
         myLayers.append(layer.name)
         myInputShapes.append(layer.input_shape)
-        myOutputShapes.append(layer.output_shape)
-        tmp = str(layer.output)
-        myActivationFunctions.append(tmp.rsplit(" ")[0])
     myDict = myTrainedModel.get_config()
-    if debug == True:
-        print("==============Model Dictionary====================")
-        print(myDict)
-        print("==================================================")
-    all_layer_configs = myDict["layers"]
-    if debug == True:
-        print("=================All Layers Dictionary=================")
-        print(all_layer_configs)
-        print("==================================================")
-
-    for l in all_layer_configs:
-        layer_dict = l
-        layer_config = layer_dict["config"]
-        layer_type = layer_dict["class_name"]
-        if debug == True:
-            print("=================Layer Dictionary=================")
-            print(layer_dict)
-            print("==================================================")
-            print("=================Layer Config Dictionary==========")
-            print(layer_config)
-            print("==================================================")
     layer = myTrainedModel.layers[layer_num]
     layer_weights = layer.get_weights()[0]
     rows = layer_weights.shape[0]-1
     layer_biases = layer.get_weights()[1]
-    neuron_weights = []
-    neuron_biases = []
-    in_shape = myInputShapes[layer_num]
-    num_ins = in_shape[1]
     neuronDotFile = open(fileName,'w')
     neuronDotFile.write("digraph g {\n")
     neuronDotFile.write("graph[splines=line]\n")
@@ -339,4 +273,8 @@ def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=2,
 if __name__ == "writedotfile":
     writedotfile()
     
-main()
+if __name__ == "neuron_group_viewer":
+    neuron_group_viewer()
+    
+if __name__ == "neuron_viewer":
+    neuron_viewer()
