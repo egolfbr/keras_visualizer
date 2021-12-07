@@ -8,9 +8,7 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense
 from sklearn.metrics import accuracy_score
-
 ################## Keras Visualizer imports ###########################
-import writedot
 from writedot import neuron_viewer, writedotfile, neuron_group_viewer
 
 #dataset import
