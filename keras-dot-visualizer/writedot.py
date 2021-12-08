@@ -209,7 +209,7 @@ def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeuron.do
         Default: False
     filename : str, optional
         String to the path and filename of where you want to save the DOt file to 
-        Default: ./myDotFile.dot 
+        Default: ./myNeuron.dot 
     
     Returns
     -------
@@ -256,7 +256,7 @@ def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=2,
         Default: False
     filename : str, optional
         String to the path and filename of where you want to save the DOt file to 
-        Default: ./myDotFile.dot 
+        Default: ./myNeurons.dot 
     
     Returns
     -------
