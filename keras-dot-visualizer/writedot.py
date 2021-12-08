@@ -194,6 +194,27 @@ def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
 
 
 def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeuron.dot",debug=False):
+    """ 
+    Makes DOT file from keras model instance. 
+
+    Parameters
+    ----------
+    myTrainedModel : Keras model instance
+    layer_num : int, optional
+        layer number of neuron to look at
+    neuron_num : int, optional
+        neuron number to look at
+    debug : Boolean, optional
+        A flag used to determine if code will have verbose output
+        Default: False
+    filename : str, optional
+        String to the path and filename of where you want to save the DOt file to 
+        Default: ./myDotFile.dot 
+    
+    Returns
+    -------
+    Nothing
+    """
     myLayers = []
     myInputShapes = []
     for layer in myTrainedModel.layers:
@@ -218,7 +239,29 @@ def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeuron.do
 
 
 def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=2,fileName="myNeurons.dot",debug=False):
+""" 
+    Makes DOT file from keras model instance. 
 
+    Parameters
+    ----------
+    myTrainedModel : Keras model instance
+    layer_num : int, optional
+        layer number of neuron to look at
+    begin_neuron : int, optional
+       first neuron in group
+    end_neuron : int, optional
+        last neuron to look at
+    debug : Boolean, optional
+        A flag used to determine if code will have verbose output
+        Default: False
+    filename : str, optional
+        String to the path and filename of where you want to save the DOt file to 
+        Default: ./myDotFile.dot 
+    
+    Returns
+    -------
+    Nothing
+    """
     myLayers = []
     myInputShapes = []
     for layer in myTrainedModel.layers:
