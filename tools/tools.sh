@@ -1,3 +1,3 @@
 #!/bin/bash
-# Windows Bash Script 
+# Windows/Unix Bash Script 
 pip install numpy pandas sklearn matplotlib 
