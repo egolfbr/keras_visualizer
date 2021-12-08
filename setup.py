@@ -1,7 +1,7 @@
 from distutils.core import setup 
 
 setup(name="keras_dot_visualizer",
-      version="0.0.2",
+      version="0.0.3",
       description="Front-end Keras Visualizer",
       author="Brian Egolf",
       author_email="egolfbr@miamioh.edu",

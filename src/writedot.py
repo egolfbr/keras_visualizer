@@ -5,8 +5,25 @@ import sys
 
 # takes a keras model instance as input
 def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
+    """ 
+    Makes DOT file from keras model instance. 
+
+    Parameters
+    ----------
+    myModel : Keras model instance
+    debug : Boolean, optional
+        A flag used to determine if code will have verbose output
+        Default: False
+    filename : str, optional
+        String to the path and filename of where you want to save the DOt file to 
+        Default: ./myDotFile.dot 
+    
+    Returns
+    -------
+    Nothing
+    """
     INFO = "Input a keras model instance and outputs a graphviz DOT file."
-    VERSION = 0.0
+    VERSION = 0.2
     def showVersion():
         print(INFO)
         print(VERSION)
