@@ -193,7 +193,7 @@ def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
     dotFile.close()
 
 
-def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeuron.dot",debug=False):
+def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0,input_num=0,fileName="myNeuron.dot",debug=False):
     """ 
     Makes DOT file from keras model instance. 
 
@@ -231,14 +231,14 @@ def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0, fileName="myNeuron.do
     print(layer_weights[0][neuron_num])
     neuronDotFile.write(myLayers[layer_num])
     neuronDotFile.write("\\n")
-    neuronDotFile.write("weight = " + str(layer_weights[0][neuron_num]))
+    neuronDotFile.write("weight = " + str(layer_weights[input_num][neuron_num]))
     neuronDotFile.write("\n")
     neuronDotFile.write("bias = " + str(layer_biases[neuron_num]) + "\"")
     neuronDotFile.write("}")
     neuronDotFile.close()
 
 
-def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=2,fileName="myNeurons.dot",debug=False):
+def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=2,input_num=0,fileName="myNeurons.dot",debug=False):
 """ 
     Makes DOT file from keras model instance. 
 
@@ -279,7 +279,7 @@ def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=2,
     		#print(layer_biases[neuron])
     		neuronDotFile.write("\"" + myLayers[layer_num] + "_" + str(neuron))
     		neuronDotFile.write("\\n")
-    		neuronDotFile.write("weight = " + str(layer_weights[0][neuron]))
+    		neuronDotFile.write("weight = " + str(layer_weights[input_num][neuron]))
     		neuronDotFile.write("\\n")
     		neuronDotFile.write("bias = " + str(layer_biases[neuron]) + "\"\n")
     	neuronDotFile.write("}")
