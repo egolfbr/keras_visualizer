@@ -1,4 +1,5 @@
 import os
+from re import A
 os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
 import sys 
 
@@ -117,6 +118,17 @@ def writedotfile(myModel,debug=False,fileName = "myDotFile.dot"):
             myNeurons.append(layer_config["units"])
         elif layer_type == "GRU":
             myNeurons.append(layer_config["units"])
+        elif layer_type == "InputLayer": 
+            num_count = 0
+            temp_arr = []
+            for elm in layer_config["batch_input_shape"]:
+                if type(elm) == int:
+                    num_count = num_count + 1
+                    temp_arr.append(elm)
+            if num_count > 1: 
+                myNeurons.append(1)
+            else: 
+                myNeurons.append(temp_arr[0])
         else:
             print(layer_type, " is not supported!")
     # show model parameters
@@ -239,6 +251,7 @@ def neuron_viewer(myTrainedModel,layer_num=0,neuron_num=0,input_num=0,fileName="
 
 
 def neuron_group_viewer(myTrainedModel,layer_num=0,begin_neuron=0, end_neuron=2,input_num=0,fileName="myNeurons.dot",debug=False):
+
 """ 
     Makes DOT file from keras model instance. 
 
