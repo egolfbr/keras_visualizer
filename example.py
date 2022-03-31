@@ -10,7 +10,7 @@ from keras.layers import Dense
 from sklearn.metrics import accuracy_score
 ################## Keras Visualizer imports ###########################
 import keras_dot_visualizer 
-from keras_dot_visualizer improt writedot
+from keras_dot_visualizer import writedot
 from writedot import neuron_viewer, writedotfile, neuron_group_viewer
 
 #dataset import
